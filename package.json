@@ -21,6 +21,6 @@
     "socket.io": "^2.1.1"
   },
   "bin": {
-    "estim8": "yarn build && yarn start"
+    "estim8": "./bin/start"
   }
 }
