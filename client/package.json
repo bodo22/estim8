@@ -1,7 +1,6 @@
 {
   "name": "estim8-client",
   "version": "0.1.0",
-  "private": true,
   "homepage": "/client/build",
   "dependencies": {
     "@material-ui/core": "^3.5.1",
