@@ -1,0 +1,23 @@
+{
+  "name": "estim8",
+  "version": "0.1.0",
+  "description": "quicker scrum task estim8ion",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bodo22/estim8.git"
+  },
+  "scripts": {
+    "build": "yarn install && cd client && yarn install && yarn build",
+    "client": "cd client && yarn start",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "server": "nodemon index.js",
+    "start": "NODE_ENV=production node index.js"
+  },
+  "license": "MIT",
+  "author": "bodo22",
+  "dependencies": {
+    "concurrently": "^4.1.0",
+    "socket.io": "^2.1.1"
+  }
+}

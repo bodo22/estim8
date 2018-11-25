@@ -1,0 +1,8 @@
+
+module.exports = {
+  connect: 'connect',
+  JOIN_ROOM: 'JOIN_ROOM',
+  SUBMIT_NUMBER: 'SUBMIT_NUMBER',
+  SET_ROOM_DATA: 'SET_ROOM_DATA',
+  RESET_ESTIMATES: 'RESET_ESTIMATES',
+}
