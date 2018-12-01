@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core';
 import { createStyles, withStyles, } from '@material-ui/core/styles';
 
+import RootContext from '../context';
 
 const styles = () => createStyles({
   paper: {
@@ -38,14 +39,10 @@ class StartInput extends React.Component<any, any> {
     return (
       <Paper className={cls.paper}>
         <TextField
-          placeholder="Room"
-          margin="normal"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => this.updateInputState('room', event)}
+          {...this.getTextFieldProps('room')}
         />
         <TextField
-          placeholder="Name"
-          margin="normal"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => this.updateInputState('name', event)}
+          {...this.getTextFieldProps('name')}
         />
         <div className={cls.btnJoin}>
           <Button
@@ -60,10 +57,26 @@ class StartInput extends React.Component<any, any> {
     );
   }
 
+  private getTextFieldProps(fieldName: string): object {
+    return {
+      variant: 'outlined',
+      placeholder: fieldName,
+      autoFocus: fieldName === 'room',
+      margin: 'normal',
+      onChange: (event: React.ChangeEvent<HTMLInputElement>) => this.updateInputState(fieldName, event),
+      onKeyPress: (ev: React.KeyboardEvent) => {
+        if (ev.key === 'Enter') {
+          ev.preventDefault();
+          this.handleSubmit();
+        }
+      },
+    };
+  }
+
   private handleSubmit = () => {
     const { room, name, } = this.state;
     if (room && name) {
-      this.props.joinRoom(room, name);
+      this.context.socket.joinRoom(room, name);
     }
   }
 
@@ -74,5 +87,7 @@ class StartInput extends React.Component<any, any> {
     });
   }
 }
+
+StartInput.contextType = RootContext;
 
 export default withStyles(styles)(StartInput);

@@ -5,23 +5,19 @@ import {
   JOIN_ROOM,
   SET_ROOM_DATA,
 } from '../constants.js';
+import RootContext, { IRootContext, } from '../context';
 import Socket from '../Socket';
 
 import { Estimate, Start, } from '.';
 
 class AppShell extends React.Component<any, any> {
 
-  private socket = new Socket();
-
-  constructor(props) {
-    super(props);
-    this.joinRoom = this.joinRoom.bind(this);
-    this.state = {
-      name: null,
-      roomData: {},
-      room: null,
-      socketConnected: false,
-    }
+  public state: IRootContext = {
+    name: '',
+    roomData: {},
+    room: '',
+    socketConnected: false,
+    socket: new Socket(),
   }
 
   public handleSocketEvents = (type: string, data: any) => {
@@ -41,36 +37,15 @@ class AppShell extends React.Component<any, any> {
   }
 
   public componentDidMount() {
-    this.socket.init(this.handleSocketEvents)
-  }
-
-  public joinRoom(room: string, name: string) {
-    this.socket.joinRoom(room, name);
+    this.state.socket.init(this.handleSocketEvents);
   }
 
   public render() {
-
-    const {
-      name,
-      room,
-      socketConnected,
-    } = this.state;
-
     return (
-      <React.Fragment>
-        <Start
-          socketConnected={socketConnected}
-          room={room}
-          joinRoom={this.joinRoom}
-        />
-        {room && name &&
-          <Estimate
-            {...this.state}
-            submitNumber={num => this.socket.submitNumber(room, num)}
-            resetEstimates={() => this.socket.resetEstimates(room)}
-          />
-        }
-      </React.Fragment>
+      <RootContext.Provider value={this.state}>
+        <Start />
+        {this.state.room && this.state.name && <Estimate />}
+      </RootContext.Provider>
     );
   }
 }

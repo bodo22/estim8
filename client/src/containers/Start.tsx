@@ -7,28 +7,22 @@ import {
 
 import { StartInput, } from '../components';
 
-class Start extends React.Component<any, any> {
+import RootContext, { IRootContext, } from '../context';
 
-  public render() {
-
-    const {
-      room,
-      socketConnected,
-      joinRoom,
-    } = this.props;
-
-    return (
-      <Modal
-        open={!socketConnected || !room}
-      >
-        {!socketConnected ?
-          <CircularProgress />
-          :
-          <StartInput joinRoom={joinRoom} />
-        }
-      </Modal>
-    );
-  }
+const Start = () => {
+  return (
+    <RootContext.Consumer>
+      {({ room, socketConnected, }: IRootContext) => (
+        <Modal open={!socketConnected || !room} >
+          {!socketConnected ?
+            <CircularProgress />
+            :
+            <StartInput />
+          }
+        </Modal>
+      )}
+    </RootContext.Consumer>
+  );
 }
 
 export default Start;

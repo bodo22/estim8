@@ -6,6 +6,8 @@ import {
 } from '@material-ui/core';
 import { createStyles, withStyles, } from '@material-ui/core/styles';
 
+import RootContext from '../context';
+
 const styles = () => createStyles({
   gridWrapper: {
     alignItems: 'center',
@@ -33,7 +35,6 @@ class Cards extends React.Component<any, any> {
 
     const {
       classes: cls,
-      resetEstimates,
     } = this.props;
 
     return (
@@ -49,7 +50,7 @@ class Cards extends React.Component<any, any> {
         })
         }
         <Grid item={true} key="reset" className={cls.btnReset}>
-          <Button variant="contained" color="primary" onClick={resetEstimates}>
+          <Button variant="contained" color="primary" onClick={() => this.resetEstimates()}>
             Reset
           </Button>
         </Grid>
@@ -57,9 +58,19 @@ class Cards extends React.Component<any, any> {
     );
   }
 
+  private resetEstimates() {
+    this.context.socket.resetEstimates(this.context.room);
+  }
+
   private submitNumber(num: number | string) {
-    return () => this.props.submitNumber(num);
+    const {
+      room,
+      socket,
+    } = this.context;
+    return () => socket.submitNumber(room, num);
   }
 }
+
+Cards.contextType = RootContext;
 
 export default withStyles(styles)(Cards);
