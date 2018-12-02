@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import {
+  CircularProgress,
   Paper,
   Table,
   TableBody,
@@ -9,18 +10,10 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
-import { createStyles, withStyles, } from '@material-ui/core/styles';
 
 import RootContext, { IRootContext, } from '../context';
 
-const styles = () => createStyles({
-  paper: {
-    maxWidth: 500,
-    margin: '0 auto',
-  },
-});
-
-const Results = ({ classes: cls }) => {
+const Results = () => {
   return (
     <RootContext.Consumer>
       {({ roomData, }: IRootContext) => {
@@ -35,22 +28,26 @@ const Results = ({ classes: cls }) => {
         }, 0);
         const averageIntVote = resultsInt ? resultSum / resultsInt : 0;
         return (
-          <Paper className={cls.paper}>
+          <Paper>
             <Table>
               <TableHead>
                 <TableRow>
                   <TableCell>Name</TableCell>
-                  <TableCell>Estimation</TableCell>
+                  <TableCell numeric={true}>Estimation</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {
                   Object.keys(roomData).map(key => {
-                    const user = roomData[key];
+                    const { currentVote, name, } = roomData[key];
+                    let estimation = currentVote;
+                    if (estimation === null || estimation === undefined) {
+                      estimation = <CircularProgress size={20}/>
+                    }
                     return (
                       <TableRow key={key}>
-                        <TableCell>{user.name}</TableCell>
-                        <TableCell>{user.currentVote}</TableCell>
+                        <TableCell>{name}</TableCell>
+                        <TableCell numeric={true}>{estimation}</TableCell>
                       </TableRow>
                     );
                   })
@@ -59,7 +56,7 @@ const Results = ({ classes: cls }) => {
               <TableFooter>
                 <TableRow>
                   <TableCell>Result:</TableCell>
-                  <TableCell>{averageIntVote}</TableCell>
+                  <TableCell numeric={true}>{averageIntVote}</TableCell>
                 </TableRow>
               </TableFooter>
             </Table>
@@ -71,6 +68,4 @@ const Results = ({ classes: cls }) => {
   );
 }
 
-Results.contextType = RootContext;
-
-export default withStyles(styles)(Results);
+export default Results;

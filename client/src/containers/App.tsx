@@ -12,6 +12,16 @@ const theme = createMuiTheme({
         alignItems: 'center',
         display: 'flex',
         justifyContent: 'center',
+      },
+    },
+    MuiPaper: {
+      root: {
+        alignItems: 'center',
+        display: 'flex',
+        justifyContent: 'center',
+        margin: '0 auto',
+        maxWidth: 500,
+        marginBottom: 16,
       }
     }
   },

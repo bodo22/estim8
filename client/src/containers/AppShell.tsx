@@ -13,6 +13,7 @@ import { Estimate, Start, } from '.';
 class AppShell extends React.Component<any, any> {
 
   public state: IRootContext = {
+    id: '',
     name: '',
     roomData: {},
     room: '',
@@ -26,7 +27,7 @@ class AppShell extends React.Component<any, any> {
         this.setState({ socketConnected: true });
         break;
       case JOIN_ROOM:
-        this.setState({ room: data.room, name: data.name });
+        this.setState({ room: data.room, name: data.name, id: data.id });
         break;
       case SET_ROOM_DATA:
         this.setState({ roomData: data.data });
@@ -41,10 +42,19 @@ class AppShell extends React.Component<any, any> {
   }
 
   public render() {
+
+    const {
+      name,
+      room,
+      roomData,
+    } = this.state;
+
     return (
       <RootContext.Provider value={this.state}>
         <Start />
-        {this.state.room && this.state.name && <Estimate />}
+        {room && name && Object.keys(roomData).length &&
+          <Estimate />
+        }
       </RootContext.Provider>
     );
   }

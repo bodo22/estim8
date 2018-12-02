@@ -46,7 +46,7 @@ io.sockets.on('connection', socket => {
     socket.join(room, err => {
       emitRoomData(room);
     });
-    socket.emit(JOIN_ROOM, { room, name, });
+    socket.emit(JOIN_ROOM, { room, name, id: socket.id });
     console.log('socket connecting to ', room);
     io.in(room).clients((err, clients) => {
       console.log(clients.length, 'is/are connected to room', room);

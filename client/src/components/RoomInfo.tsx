@@ -12,20 +12,11 @@ import Person from '@material-ui/icons/Person';
 import RootContext, { IRootContext, } from '../context';
 
 const styles = () => createStyles({
-  infoWrapper: {
-    alignItems: 'center',
-    background: '#fff',
-    bottom: 0,
-    maxWidth: 500,
-    margin: '0 auto',
+  infoText: {
+    padding: 16,
     display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
-    '& > p': {
-      padding: 16,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
   },
   infoIcon: {
     marginRight: 8,
@@ -37,11 +28,11 @@ const RoomInfo = ({ classes: cls }) => {
     <RootContext.Consumer>
       {({ room, name }: IRootContext) => (
         <Paper className={cls.infoWrapper}>
-          <Typography>
+          <Typography className={cls.infoText}>
             <People className={cls.infoIcon} />
             {room}
           </Typography>
-          <Typography>
+          <Typography className={cls.infoText}>
             <Person className={cls.infoIcon} />
             {name}
           </Typography>
