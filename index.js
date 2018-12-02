@@ -9,14 +9,14 @@ app.listen(port);
 
 console.log(`listening at port ${port}`);
 
-if (process.argv.includes('production')) {
-  console.log('running in production');
-} else {
+if (process.argv.includes('dev')) {
   console.log('not running in production');
+} else {
+  console.log('running in production');
 }
 
 function handler(req, res) {
-  if (process.argv.includes('production')) {
+  if (process.argv.includes('dev')) {
     let filePath = `.${req.url}`;
     if (req.url === '/') {
       filePath = './client/build/index.html';

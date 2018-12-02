@@ -12,8 +12,8 @@
     "client": "cd client && yarn start",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "i": "yarn install && cd client && yarn install",
-    "server": "nodemon index.js",
-    "start": "node index.js production"
+    "server": "nodemon index.js dev",
+    "start": "node index.js"
   },
   "license": "MIT",
   "author": "bodo22",
@@ -22,6 +22,6 @@
     "socket.io": "^2.1.1"
   },
   "bin": {
-    "estim8": "./index.js production"
+    "estim8": "./index.js"
   }
 }
