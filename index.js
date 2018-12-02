@@ -9,8 +9,14 @@ app.listen(port);
 
 console.log(`listening at port ${port}`);
 
+if (process.argv.includes('production')) {
+  console.log('running in production');
+} else {
+  console.log('not running in production');
+}
+
 function handler(req, res) {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.argv.includes('production')) {
     let filePath = `.${req.url}`;
     if (req.url === '/') {
       filePath = './client/build/index.html';
@@ -24,8 +30,6 @@ function handler(req, res) {
       res.writeHead(200);
       res.end(data);
     });
-  } else {
-    console.log('not running in production');
   }
 }
 
