@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-yarn build && yarn start
+npx yarn build && npx yarn start

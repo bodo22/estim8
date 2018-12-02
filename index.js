@@ -2,7 +2,10 @@ const app = require('http').createServer(handler);
 const io = require('socket.io')(app);
 const fs = require('fs');
 
-app.listen(5000);
+const port = 5000;
+app.listen(port);
+
+console.log(`listening at port ${port}`);
 
 function handler(req, res) {
   if (process.env.NODE_ENV === 'production') {
