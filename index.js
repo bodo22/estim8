@@ -17,9 +17,9 @@ if (process.argv.includes('dev')) {
 
 function handler(req, res) {
   if (!process.argv.includes('dev')) {
-    let filePath = `.${req.url}`;
+    let filePath = `${__dirname}${req.url}`;
     if (req.url === '/') {
-      filePath = './client/build/index.html';
+      filePath = `${__dirname}/client/build/index.html`;
     }
     fs.readFile(filePath, (err, data) => {
       if (err) {
