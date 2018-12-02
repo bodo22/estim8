@@ -8,10 +8,10 @@
     "url": "https://github.com/bodo22/estim8.git"
   },
   "scripts": {
-    "build": "npx yarn install && cd client && npx yarn install && npx yarn build",
-    "client": "cd client && npx yarn start",
-    "dev": "concurrently --kill-others-on-fail \"npx yarn server\" \"npx yarn client\"",
-    "i": "npx yarn install && cd client && npx yarn install",
+    "build": "yarn install && cd client && yarn install && yarn build",
+    "client": "cd client && yarn start",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "i": "yarn install && cd client && yarn install",
     "server": "nodemon index.js",
     "start": "NODE_ENV=production node index.js"
   },
@@ -22,6 +22,6 @@
     "socket.io": "^2.1.1"
   },
   "bin": {
-    "estim8": "./bin/start"
+    "estim8": "npm start"
   }
 }
