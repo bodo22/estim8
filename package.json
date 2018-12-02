@@ -22,6 +22,6 @@
     "socket.io": "^2.1.1"
   },
   "bin": {
-    "estim8": "NODE_ENV=production ./index.js"
+    "estim8": "NODE_ENV=production node ./index.js"
   }
 }
