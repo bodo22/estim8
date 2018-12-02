@@ -16,7 +16,7 @@ if (process.argv.includes('dev')) {
 }
 
 function handler(req, res) {
-  if (process.argv.includes('dev')) {
+  if (!process.argv.includes('dev')) {
     let filePath = `.${req.url}`;
     if (req.url === '/') {
       filePath = './client/build/index.html';
