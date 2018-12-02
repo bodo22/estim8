@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const app = require('http').createServer(handler);
 const io = require('socket.io')(app);
 const fs = require('fs');
